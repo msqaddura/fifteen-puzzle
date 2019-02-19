@@ -1,0 +1,3 @@
+[submodule "WebGLadiator"]
+	path = submodules/WebGLadiator
+url=git@github.com:msqaddura/web-gladiator.git

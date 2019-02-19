@@ -1,0 +1,45 @@
+{
+  "name": "webgladiator",
+  "version": "1.0.0",
+  "engines": {
+    "node": "8.11.3"
+  },
+  "description": "",
+  "main": "Server/server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "hs ./dist -o",
+    "clean": "rimraf dist && rimraf build",
+    "watch": "npm run serve:dev  -- --watch",
+    "client:dev": "webpack --config config/webpack.config.dev.js --progress",
+    "client:prod": "webpack --config config/webpack.config.prod.js --progress",
+    "serve:dev": "webpack-dev-server --config config/webpack.config.dev.js",
+    "serve:staging": "webpack-dev-server --config config/webpack.config.staging.js"
+  },
+  "author": "Mohamad Qaddura",
+  "license": "UNLICENSED",
+  "private": true,
+  "devDependencies": {
+    "babel-cli": "*",
+    "babel-preset-es2015": "*",
+    "babel-preset-stage-2": "*",
+    "clean-webpack-plugin": "^0.1.19",
+    "copy-webpack-plugin": "^4.5.2",
+    "cross-env": "^5.2.0",
+    "rimraf": "*",
+    "ts-loader": "^4.4.2",
+    "tslint": "^5.11.0",
+    "typescript": "^2.9.2",
+    "uglifyjs-webpack-plugin": "^1.2.7",
+    "webpack": "^4.16.5",
+    "webpack-cli": "^3.1.0",
+    "webpack-dev-server": "^3.1.5",
+    "http-server": "*"
+  },
+  "dependencies": {
+    "clock-timer.js": "*",
+    "colyseus": "^0.8.15",
+    "express": "^4.16.3",
+    "rxjs": "^5.5.11"
+  }
+}
