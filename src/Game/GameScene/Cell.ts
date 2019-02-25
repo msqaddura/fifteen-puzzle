@@ -15,30 +15,12 @@ const STATES = {
 };
 
 export class Cell extends Entity {
-  _i;
-  _j;
+  i;
+  j;
   num;
   stateMachine;
   fadeTween;
   lockTween;
-
-  get i() {
-    return this._i;
-  }
-
-  set i(value) {
-    //this.x = this.params.shifts.left[value];
-    this._i = value;
-  }
-
-  get j() {
-    return this._j;
-  }
-
-  set j(value) {
-    //this.y = this.params.shifts.top[value];
-    this._j = value;
-  }
 
   initialize() {
     window["cells"] = window["cells"] || [];

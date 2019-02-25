@@ -68,8 +68,29 @@ export class GameDataSource {
   applyMove(num) {
     const idle = this.findCellByNumber(16);
     const target = this.findCellByNumber(num);
-    this._state[idle.i][idle.j] = { ...target, i: idle.i, j: idle.j };
-    this._state[target.i][target.j] = { ...idle, i: target.i, j: target.j };
+    console.log("moving", target, "to", idle);
+
+    const targetI = target.i;
+    const targetJ = target.j;
+    const idleI = idle.i;
+    const idleJ = idle.j;
+    if (idleI > targetI) {
+      for (let i = idleI; i > targetI; i--) {
+        this.swapIndicies(i, idleJ, i - 1, idleJ);
+      }
+    } else if (idleI < targetI) {
+      for (let i = idleI; i < targetI; i++) {
+        this.swapIndicies(i, idleJ, i + 1, idleJ);
+      }
+    } else if (idleJ > targetJ) {
+      for (let j = idleJ; j > targetJ; j--) {
+        this.swapIndicies(idleI, j, idleI, j - 1);
+      }
+    } else if (idleJ < targetJ) {
+      for (let j = idleJ; j < targetJ; j++) {
+        this.swapIndicies(idleI, j, idleI, j + 1);
+      }
+    }
     this.mutateMatrix();
   }
 
@@ -83,26 +104,57 @@ export class GameDataSource {
           curr.state = CELL_STATE.GAP;
           const changed = false;
           if (j !== 0) {
-            this._state[i][j - 1].state = CELL_STATE.IDLE;
+            let top = j;
+            while (top > 0) {
+              this._state[i][--top].state = CELL_STATE.IDLE;
+            }
             console.log("top");
           }
           if (i !== 0) {
-            this._state[i - 1][j].state = CELL_STATE.IDLE;
+            let left = i;
+            while (left > 0) {
+              this._state[--left][j].state = CELL_STATE.IDLE;
+            }
             console.log("left");
           }
           if (j !== 3) {
             //above
-            this._state[i][j + 1].state = CELL_STATE.TAKEN;
+            let bottom = j;
+            while (bottom < 3) {
+              this._state[i][++bottom].state = CELL_STATE.TAKEN;
+            }
             console.log("bottom");
           }
           if (i !== 3) {
-            this._state[i + 1][j].state = CELL_STATE.TAKEN;
+            let right = i;
+            while (right < 3) {
+              this._state[++right][j].state = CELL_STATE.TAKEN;
+            }
             console.log("right");
           }
         }
       }
     }
     this._invalidate();
+  }
+
+  swapIndicies(ai, aj, bi, bj) {
+    const a = this._state[ai][aj];
+    const b = this._state[bi][bj];
+    this.swapTiles(a, b);
+  }
+
+  swapTiles(a, b) {
+    this._state[a.i][a.j] = {
+      ...b,
+      i: a.i,
+      j: a.j
+    };
+    this._state[b.i][b.j] = {
+      ...a,
+      i: b.i,
+      j: b.j
+    };
   }
 
   private _invalidate() {
