@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Show Case!</title>
+    <style>
+      * {
+        padding: 0;
+        margin: 0;
+        border: 0;
+        overflow: hidden;
+        height: 100%;
+      }
+
+      body {
+        background-image: url(Resources/bg.jpg);
+        background-size: cover;
+        background-repeat: no-repeat;
+      }
+      button {
+        background: rgba(40, 185, 230, 0.671) !important;
+      }
+
+      button::after {
+        content: attr(title); /*take the content from the title*/
+        color: white;
+      }
+    </style>
+
+    <meta
+      name="viewport"
+      content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+    />
+  </head>
+
+  <body>
+    <script src="bundle.js"></script>
+  </body>
+</html>
