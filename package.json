@@ -39,7 +39,7 @@
   },
   "dependencies": {
     "clock-timer.js": "*",
-    "colyseus": "^0.8.15",
+    "colyseus": "^0.14.24",
     "express": "^4.16.3",
     "rxjs": "^5.5.11"
   }
